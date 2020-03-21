@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Modal, Button} from 'react-bootstrap';
 
-function CreateFormModal(props) {
+function EditFormModal(props) {
   return (
     <Modal
       {...props}
@@ -11,7 +11,7 @@ function CreateFormModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add User Profile
+          Edit User Profile
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -42,4 +42,9 @@ function CreateFormModal(props) {
   );
 }
 
-export default CreateFormModal;
+export default EditFormModal;
+
+
+{/* <Button variant="primary" type="submit">
+    Submit
+  </Button> */}
