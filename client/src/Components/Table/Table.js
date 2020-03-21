@@ -1,12 +1,15 @@
 import React from 'react';
 
-import {Card, Table, Container, Button, Dropdown} from 'react-bootstrap';
+import {Card, Table, Container, Dropdown} from 'react-bootstrap';
 import {BsThreeDots} from 'react-icons/bs';
-import { FaDumpster, FaEdit, FaCross, FaTimes } from 'react-icons/fa';
-
+import { FaEdit, FaTimes } from 'react-icons/fa';
+import MyVerticallyCenteredModal from '../CreateForm/CreateForm'
 function TableComponent(){
+
+  const [modalShow, setModalShow] = React.useState(false);
+
   return(
-    // style={{ width:'100%' }}
+    <>
     <Container >
       <Card>
     <Table responsive>
@@ -31,7 +34,7 @@ function TableComponent(){
   {/* <BsThreeDots></BsThreeDots> */}
   </Dropdown.Toggle>
   <Dropdown.Menu>
-    <Dropdown.Item href="#/action-2"><FaEdit className="mr-2"></FaEdit>Edit Profile</Dropdown.Item>
+    <Dropdown.Item href="#/action-2"  onClick={() => setModalShow(true)}><FaEdit className="mr-2"></FaEdit>Edit Profile</Dropdown.Item>
     <Dropdown.Item href="#/action-3"><FaTimes  className="mr-2"/>Delete Profile</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown> 
@@ -43,6 +46,11 @@ function TableComponent(){
 </Card>
     
 </Container>
+ <MyVerticallyCenteredModal
+   show={modalShow}
+   onHide={() => setModalShow(false)}
+ />
+ </>
   )
 }
 

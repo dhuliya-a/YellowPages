@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaAtom, FaUserCircle, FaLifeRing, FaTelegram } from 'react-icons/fa';
+import {FaUserCircle, FaLifeRing, FaTelegram } from 'react-icons/fa';
 import {BsList} from 'react-icons/bs';
 
 import {Navbar, Nav, Form, Button} from 'react-bootstrap';
