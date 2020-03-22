@@ -1,13 +1,13 @@
 import React from 'react';
 import {FaPlusCircle} from 'react-icons/fa';
 import {Jumbotron, Button, Container} from 'react-bootstrap';
-
 import CreateFormModal from '../CreateForm/CreateForm'
 
 function Header(){
   
   const [modalShow, setModalShow] = React.useState(false);
 
+  
   return(
     <>
     <Jumbotron style={{ backgroundColor: 'yellow' }}>
@@ -18,7 +18,7 @@ function Header(){
         
         <div>
         <p align="right">
-          <Button className="btn btn-dark" onClick={() => setModalShow(true)}> <FaPlusCircle className="mr-2"/>Add New User</Button>
+          <Button className="btn btn-dark" onClick={() => setModalShow(true)} > <FaPlusCircle className="mr-2"/>Add New User</Button>
         </p>
         </div>
       </Container>  
