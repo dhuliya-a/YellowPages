@@ -2,27 +2,16 @@ import React, {useState, useEffect} from 'react';
 import {Form, Modal, Button, Col, Container, Card} from 'react-bootstrap';
 import {FaUserCircle} from 'react-icons/fa';
 import axios from 'axios';
+import {Redirect} from 'react-router';
 
 function EditFormModal(props) {
 
   const [email, setEmail] = useState('abc@def.com');
-  const [name, setName] = useState('User');
+  const [name, setName] = useState('Mark');
   const [contact, setContact] = useState('0000000000');
   const [address, setAddress] = useState('Default Address');
   const [profile_img, setPicture] = useState('No User Profile');
 
- const [user, setUser] = useState([]);
- 
-  useEffect(() => {
-    axios.get('http://localhost:4000/user/'+props["userId"])
-    .then(response => {
-      console.log(response.data);
-      setUser(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  },[]);
 
   const handleUserNameInput = e => {
     setName(e.target.value);
@@ -44,19 +33,27 @@ function EditFormModal(props) {
     setPicture(e.target.value);
   };
   
+  
+  const reloadSite = (e) => {
+    // window.location('/')
+    console.log("Hi");
+    };
+  
   const onSubmit = (e) => {
-    // console.log(props["userId"]);
-    // const user = {
-    //   name: name,
-    //   email: email,
-    //   contact: contact,
-    //   address: address,
-    //   profile_img: profile_img
-    // };
-
-    // axios.post('http://localhost:4000/update_user/'+userId, user)
-    //   .then(res => 
-    //     console.log(res.data));
+    const userId = (props["user"]["_id"]);
+    axios.get('http://localhost:4000/user/'+userId).then(res=>console.log(res.data));
+    const Updateduser = {
+      name: name,
+      email: email,
+      contact: contact,
+      address: address,
+      profile_img: profile_img
+    };
+    console.log(Updateduser);
+    axios.post('http://localhost:4000/update_user/'+userId, Updateduser)
+      .then(res => 
+        console.log(res.data));
+        return (<Redirect to = "http://localhost:4000" />)
   };
 
   return (
@@ -65,10 +62,11 @@ function EditFormModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add User
+          Edit User
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -88,12 +86,12 @@ function EditFormModal(props) {
                 <br/> 
                 <Form.Group  as={Col} controlId="formGridCity">
                   <Form.Label>User Name</Form.Label>
-                  <Form.Control type="text" onChange={handleUserNameInput} value={name} placeholder="username..." />
+                  <Form.Control type="text" onChange={handleUserNameInput} defaultValue={props["user"]["name"]} placeholder="username..." />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridZip">
                   <Form.Label>Address</Form.Label>
-                  <Form.Control type="text" onChange={handleAddressInput} value={address} placeholder="Enter Address" />
+                  <Form.Control type="text" onChange={handleAddressInput} defaultValue={props["user"]["address"]} placeholder="Enter Address" />
                 </Form.Group>
               </div>
             </Container>
@@ -112,17 +110,17 @@ function EditFormModal(props) {
             <Container>
               <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>Contact</Form.Label>
-                <Form.Control type="text" onChange={handleContactInput} value={contact} placeholder="User Contact Number"/>
+                <Form.Control type="text" onChange={handleContactInput} defaultValue={props["user"]["contact"]} placeholder="User Contact Number"/>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="text" onChange={handleEmailInput} value={email} placeholder="User E-mail Address"/>
+                <Form.Control type="text" onChange={handleEmailInput} defaultValue={props["user"]["email"]} placeholder="User E-mail Address"/>
               </Form.Group>
             </Container>
             
             <Container align="center">
-              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>onSubmit(user["_id"])}>Add New User</Button>
+              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit()}}>Save Changes</Button>
             </Container>
             <br/>
             <br/>

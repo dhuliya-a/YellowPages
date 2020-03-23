@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Form, Modal, Button, Col, Container, Card} from 'react-bootstrap';
 import {FaUserCircle} from 'react-icons/fa';
 import axios from 'axios';
+import {Redirect} from 'react-router';
 
 function CreateFormModal(props) {
 
@@ -31,7 +32,7 @@ function CreateFormModal(props) {
     setPicture(e.target.value);
   };
   
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     const user = {
       name: name,
       email: email,
@@ -108,7 +109,7 @@ function CreateFormModal(props) {
             </Container>
             
             <Container align="center">
-              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={onSubmit}>Add New User</Button>
+              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit()}}>Add New User</Button>
             </Container>
             <br/>
             <br/>

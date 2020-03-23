@@ -52,7 +52,7 @@ exports.update = (req, res, next)=>{
 
   const user_id = req.params.id;
 
-  User.findOneAndUpdate(user_id, {
+  User.findByIdAndUpdate(user_id, {
     name: req.body.name,
     email: req.body.email,
     address: req.body.address,

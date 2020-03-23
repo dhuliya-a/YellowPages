@@ -3,15 +3,17 @@ import axios from 'axios';
 import {Card, Table, Container, Dropdown} from 'react-bootstrap';
 import { FaEdit, FaTimes, FaUserCircle } from 'react-icons/fa';
 
+// import {Redirect} from 'react-router';
+
 import EditFormModal from '../EditForm/EditForm'
 
 function TableComponent(){
 
   const [modalShow, setModalShow] = React.useState(false);
   const [users, setUsers] = useState([]);
-  let userId='';
- 
- 
+  // let userId='';
+  const [user, setUser] = useState({});
+  
   useEffect(() => {
     axios.get('http://localhost:4000/users')
     .then(response => {
@@ -31,6 +33,7 @@ function TableComponent(){
      .then(response => {
         console.log(response.data);
        setUsers(response.data);
+      //  return (<Redirect to = "http://localhost:4000" />)
       })
       .catch((error) => {
         console.log(error);
@@ -40,6 +43,16 @@ function TableComponent(){
       console.log(error);
     });
   }
+
+  
+  const getProfile=(userId)=>{
+    
+    axios.get('http://localhost:4000/user/'+userId)
+    .then(res => {
+      setUser(res.data)})
+  }
+
+
 
   return(
     <>
@@ -59,9 +72,7 @@ function TableComponent(){
           <tbody>
             {users.map(user =>
               
-              <tr>
-              <td hidden="true">{userId=user["_id"]}</td>       
-        
+              <tr>             
                 <td align="left"><FaUserCircle className="mr-3"></FaUserCircle>{user["name"]}</td>
                 <td>{user["address"]}</td>
                 <td>{user["contact"]}</td>
@@ -70,19 +81,20 @@ function TableComponent(){
                   <Dropdown>
                     <Dropdown.Toggle variant="light" id="dropdown-basic" className="btn-sm"></Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="#/action-2" onClick={() => setModalShow(true)}><FaEdit className="mr-2"></FaEdit>Edit Profile</Dropdown.Item>
+                      <Dropdown.Item href="#/action-2" onClick={()=>{ setModalShow(true); getProfile(user["_id"]) }}  ><FaEdit className="mr-2"></FaEdit>Edit Profile</Dropdown.Item>
                       <Dropdown.Item href="#/action-3" onClick={()=>deleteProfile(user["_id"])}><FaTimes  className="mr-2"/>Delete Profile</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown> 
                 </td>
               </tr>
       )}
+
           </tbody>
         </Table>
       </Card>    
     </Container>
 
-    <EditFormModal userId={userId}  show={modalShow} onHide={() => setModalShow(false)}/>
+    <EditFormModal user={user} show={modalShow} onHide={() => setModalShow(false)}/>
     </>
   )
 };
