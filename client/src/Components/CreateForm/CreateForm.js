@@ -4,6 +4,8 @@ import {FaUserCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {Redirect} from 'react-router';
 
+const EMAIL_REGEX = /\S+@\S+\.\S+/;
+
 function CreateFormModal(props) {
 
   const [email, setEmail] = useState('abc@def.com');
@@ -13,7 +15,12 @@ function CreateFormModal(props) {
   const [profile_img, setPicture] = useState('No User Profile');
 
   const resetToHome = (e) => {
-    return <Redirect to = 'https://yp-directory.herokuapp.com/' />
+    if (name!=='' && email!=='' && address!=='' && contact!==''){
+      if (contact.length===10 && EMAIL_REGEX.test(email))
+      {
+        console.log("RESET TO HOME");
+        return <Redirect to = 'https://yp-directory.herokuapp.com/' />
+      }}
   };
 
 
@@ -39,17 +46,24 @@ function CreateFormModal(props) {
   
 
   const onSubmit = (e) => {
-    const user = {
-      name: name,
-      email: email,
-      contact: contact,
-      address: address,
-      profile_img: profile_img
-    };
+    if (name!=='' && email!=='' && address!=='' && contact!==''){
+      if (contact.length===10 && EMAIL_REGEX.test(email))
+        {
+          console.log("VALID EMAIL");
+          const user = {
+            name: name,
+            email: email,
+            contact: contact,
+            address: address,
+            profile_img: profile_img
+          };
+      
+          axios.post('/api/create_user', user)
+            .then(res => 
+              console.log(res.data));
+        }
+    }
 
-    axios.post('/api/create_user', user)
-      .then(res => 
-        console.log(res.data));
   };
 
   return (
@@ -81,7 +95,7 @@ function CreateFormModal(props) {
                 <br/> 
                 <Form.Group  as={Col} controlId="formGridCity">
                   <Form.Label>User Name</Form.Label>
-                  <Form.Control type="text" onChange={handleUserNameInput} maxlength="40" required="required" value={name} placeholder="username..." />
+                  <Form.Control type="text" onChange={handleUserNameInput} maxlength="40" required="required" value={name} placeholder="User Name" />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridZip">

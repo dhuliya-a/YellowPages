@@ -4,6 +4,8 @@ import {FaUserCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {Redirect} from 'react-router';
 
+const EMAIL_REGEX = /\S+@\S+\.\S+/;
+
 function EditFormModal(props) {
 
   const [email, setEmail] = useState('abc@def.com');
@@ -13,7 +15,12 @@ function EditFormModal(props) {
   const [profile_img, setPicture] = useState('No User Profile');
 
   const resetToHome = (e) => {
-    return <Redirect to = 'https://yp-directory.herokuapp.com/' />
+    if (name!=='' && email!=='' && address!=='' && contact!==''){
+      if (contact.length===10 && EMAIL_REGEX.test(email))
+        {
+         return <Redirect to = 'https://yp-directory.herokuapp.com/' />
+        }
+    }
   };
 
   const handleUserNameInput = e => {
@@ -38,19 +45,22 @@ function EditFormModal(props) {
   
   const onSubmit = (e) => {
     const userId = (props["user"]["_id"]);
-    axios.get('/api/user/'+userId).then(res=>console.log(res.data));
-    const Updateduser = {
-      name: name,
-      email: email,
-      contact: contact,
-      address: address,
-      profile_img: profile_img
-    };
-    console.log(Updateduser);
-    axios.post('/api/update_user/'+userId, Updateduser)
-      .then(res => 
-        console.log(res.data));
-        return (<Redirect to = '/' />)
+    if (name!=='' && email!=='' && address!=='' && contact!==''){
+      if (contact.length===10 && EMAIL_REGEX.test(email))
+        {
+          const Updateduser = {
+            name: name,
+            email: email,
+            contact: contact,
+            address: address,
+            profile_img: profile_img
+          };
+          axios.post('/api/update_user/'+userId, Updateduser)
+            .then(res => 
+              console.log(res.data));
+              return (<Redirect to = '/' />)
+        }
+    }  
   };
 
   return (
