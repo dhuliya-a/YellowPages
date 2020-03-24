@@ -12,6 +12,11 @@ function CreateFormModal(props) {
   const [address, setAddress] = useState('Default Address');
   const [profile_img, setPicture] = useState('No User Profile');
 
+  const resetToHome = (e) => {
+    <Redirect to = 'https://yp-directory.herokuapp.com/' />
+  };
+
+
   const handleUserNameInput = e => {
     setName(e.target.value);
   };
@@ -53,7 +58,7 @@ function CreateFormModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton >
         <Modal.Title id="contained-modal-title-vcenter">
           Add User
         </Modal.Title>
@@ -109,7 +114,7 @@ function CreateFormModal(props) {
             </Container>
             
             <Container align="center">
-              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit()}}>Add New User</Button>
+              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit(), resetToHome()}}>Add New User</Button>
             </Container>
             <br/>
             <br/>
