@@ -15,7 +15,7 @@ function TableComponent(){
   const [user, setUser] = useState({});
   
   useEffect(() => {
-    axios.get('http://localhost:4000/users')
+    axios.get('/api/users')
     .then(response => {
       console.log(response.data);
       setUsers(response.data);
@@ -26,14 +26,13 @@ function TableComponent(){
   },[]);
 
   const deleteProfile=(userId)=>{
-    axios.post('http://localhost:4000/delete_user/'+userId)
+    axios.post('/api/delete_user/'+userId)
     .then(response => {
       console.log(response.data);
-      axios.get('http://localhost:4000/users')
+      axios.get('/api/users')
      .then(response => {
         console.log(response.data);
        setUsers(response.data);
-      //  return (<Redirect to = "http://localhost:4000" />)
       })
       .catch((error) => {
         console.log(error);
@@ -47,7 +46,7 @@ function TableComponent(){
   
   const getProfile=(userId)=>{
     
-    axios.get('http://localhost:4000/user/'+userId)
+    axios.get('/api/user/'+userId)
     .then(res => {
       setUser(res.data)})
   }

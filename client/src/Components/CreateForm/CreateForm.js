@@ -41,7 +41,7 @@ function CreateFormModal(props) {
       profile_img: profile_img
     };
 
-    axios.post('http://localhost:4000/create_user', user)
+    axios.post('/api/create_user', user)
       .then(res => 
         console.log(res.data));
   };

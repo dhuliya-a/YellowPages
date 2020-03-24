@@ -33,15 +33,9 @@ function EditFormModal(props) {
     setPicture(e.target.value);
   };
   
-  
-  const reloadSite = (e) => {
-    // window.location('/')
-    console.log("Hi");
-    };
-  
   const onSubmit = (e) => {
     const userId = (props["user"]["_id"]);
-    axios.get('http://localhost:4000/user/'+userId).then(res=>console.log(res.data));
+    axios.get('/api/user/'+userId).then(res=>console.log(res.data));
     const Updateduser = {
       name: name,
       email: email,
@@ -50,10 +44,10 @@ function EditFormModal(props) {
       profile_img: profile_img
     };
     console.log(Updateduser);
-    axios.post('http://localhost:4000/update_user/'+userId, Updateduser)
+    axios.post('/api/update_user/'+userId, Updateduser)
       .then(res => 
         console.log(res.data));
-        return (<Redirect to = "http://localhost:4000" />)
+        return (<Redirect to = {process.env.BASE_URL} />)
   };
 
   return (

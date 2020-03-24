@@ -5,7 +5,7 @@ const MONGODB_URI = require('./config/mongodb');
 const mongoose = require('mongoose');
 const path = require("path");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 //routes
 const userRoutes = require('./routes/user_routes');
@@ -19,7 +19,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( {extended: false} ));
 
-app.use(userRoutes);
+app.use('/api',userRoutes);
 
 app.get("*", (req, res) => {
    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
