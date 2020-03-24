@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Form, Modal, Button, Col, Container, Card} from 'react-bootstrap';
 import {FaUserCircle} from 'react-icons/fa';
 import axios from 'axios';
@@ -13,7 +13,7 @@ function EditFormModal(props) {
   const [profile_img, setPicture] = useState('No User Profile');
 
   const resetToHome = (e) => {
-    <Redirect to = 'https://yp-directory.herokuapp.com/' />
+    return <Redirect to = 'https://yp-directory.herokuapp.com/' />
   };
 
   const handleUserNameInput = e => {
@@ -50,7 +50,7 @@ function EditFormModal(props) {
     axios.post('/api/update_user/'+userId, Updateduser)
       .then(res => 
         console.log(res.data));
-        return (<Redirect to = {process.env.BASE_URL} />)
+        return (<Redirect to = '/' />)
   };
 
   return (
@@ -116,7 +116,7 @@ function EditFormModal(props) {
             </Container>
             
             <Container align="center">
-              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit(), resetToHome()}}>Save Changes</Button>
+              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit(); resetToHome();}}>Save Changes</Button>
             </Container>
             <br/>
             <br/>

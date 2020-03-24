@@ -12,10 +12,8 @@ function CreateFormModal(props) {
   const [address, setAddress] = useState('Default Address');
   const [profile_img, setPicture] = useState('No User Profile');
 
-  const EMAIL_REGEX = new RegExp();
-
   const resetToHome = (e) => {
-    <Redirect to = 'https://yp-directory.herokuapp.com/' />
+    return <Redirect to = 'https://yp-directory.herokuapp.com/' />
   };
 
 
@@ -117,7 +115,7 @@ function CreateFormModal(props) {
             </Container>
             
             <Container align="center">
-              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit(), resetToHome()}}>Add New User</Button>
+              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit(); resetToHome();}}>Add New User</Button>
             </Container>
             <br/>
             <br/>
