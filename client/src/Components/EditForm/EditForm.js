@@ -12,7 +12,6 @@ function EditFormModal(props) {
   const [address, setAddress] = useState('Default Address');
   const [profile_img, setPicture] = useState('No User Profile');
 
-
   const resetToHome = (e) => {
     <Redirect to = 'https://yp-directory.herokuapp.com/' />
   };
@@ -75,7 +74,7 @@ function EditFormModal(props) {
                 <Card className="float-left" style={{ width: '16rem' }}>
                   <FaUserCircle size="30%"></FaUserCircle>
                   <Card.Body>
-                    <Button type="submit" variant="primary" className="btn-light" onSubmit={handleProfileInput} style={{alignItems:"centre", width:"60%"}}>Upload</Button>
+                    <Button type="submit" variant="primary" className="btn-light"  onSubmit={handleProfileInput} style={{alignItems:"centre", width:"60%"}}>Upload</Button>
                   </Card.Body>
                 </Card>
               </div>
@@ -83,12 +82,12 @@ function EditFormModal(props) {
                 <br/> 
                 <Form.Group  as={Col} controlId="formGridCity">
                   <Form.Label>User Name</Form.Label>
-                  <Form.Control type="text" onChange={handleUserNameInput} defaultValue={props["user"]["name"]} placeholder="username..." />
+                  <Form.Control type="text" onChange={handleUserNameInput} maxlength="40" required="required" defaultValue={props["user"]["name"]} placeholder="User Name" />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridZip">
                   <Form.Label>Address</Form.Label>
-                  <Form.Control type="text" onChange={handleAddressInput} defaultValue={props["user"]["address"]} placeholder="Enter Address" />
+                  <Form.Control type="text" onChange={handleAddressInput} maxlength="80" required="required" defaultValue={props["user"]["address"]} placeholder="Enter Address" />
                 </Form.Group>
               </div>
             </Container>
@@ -107,12 +106,12 @@ function EditFormModal(props) {
             <Container>
               <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>Contact</Form.Label>
-                <Form.Control type="text" onChange={handleContactInput} defaultValue={props["user"]["contact"]} placeholder="User Contact Number"/>
+                <Form.Control type="text" onChange={handleContactInput} maxlength="10" required="required" defaultValue={props["user"]["contact"]} placeholder="User Contact Number"/>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="text" onChange={handleEmailInput} defaultValue={props["user"]["email"]} placeholder="User E-mail Address"/>
+                <Form.Control type="text" onChange={handleEmailInput} title="Email Address" pattern="^\S+@\S+$" required="required" defaultValue={props["user"]["email"]} placeholder="User E-mail Address"/>
               </Form.Group>
             </Container>
             

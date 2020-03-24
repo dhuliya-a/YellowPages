@@ -11,7 +11,6 @@ function TableComponent(){
 
   const [modalShow, setModalShow] = React.useState(false);
   const [users, setUsers] = useState([]);
-  // let userId='';
   const [user, setUser] = useState({});
   
   useEffect(() => {

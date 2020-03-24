@@ -12,6 +12,8 @@ function CreateFormModal(props) {
   const [address, setAddress] = useState('Default Address');
   const [profile_img, setPicture] = useState('No User Profile');
 
+  const EMAIL_REGEX = new RegExp();
+
   const resetToHome = (e) => {
     <Redirect to = 'https://yp-directory.herokuapp.com/' />
   };
@@ -37,6 +39,7 @@ function CreateFormModal(props) {
     setPicture(e.target.value);
   };
   
+
   const onSubmit = (e) => {
     const user = {
       name: name,
@@ -80,12 +83,12 @@ function CreateFormModal(props) {
                 <br/> 
                 <Form.Group  as={Col} controlId="formGridCity">
                   <Form.Label>User Name</Form.Label>
-                  <Form.Control type="text" onChange={handleUserNameInput} value={name} placeholder="username..." />
+                  <Form.Control type="text" onChange={handleUserNameInput} maxlength="40" required="required" value={name} placeholder="username..." />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridZip">
                   <Form.Label>Address</Form.Label>
-                  <Form.Control type="text" onChange={handleAddressInput} value={address} placeholder="Enter Address" />
+                  <Form.Control type="text" onChange={handleAddressInput} maxlength="80" required="required" value={address} placeholder="Enter Address" />
                 </Form.Group>
               </div>
             </Container>
@@ -104,12 +107,12 @@ function CreateFormModal(props) {
             <Container>
               <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>Contact</Form.Label>
-                <Form.Control type="text" onChange={handleContactInput} value={contact} placeholder="User Contact Number"/>
+                <Form.Control type="text" onChange={handleContactInput} maxlength="10" required="required" value={contact} placeholder="User Contact Number"/>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="text" onChange={handleEmailInput} value={email} placeholder="User E-mail Address"/>
+                <Form.Control type="text" onChange={handleEmailInput} required="required" value={email} title="Email Address" pattern="^\S+@\S+$" placeholder="User E-mail Address"/>
               </Form.Group>
             </Container>
             
