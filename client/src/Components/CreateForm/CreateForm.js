@@ -18,7 +18,6 @@ function CreateFormModal(props) {
     if (name!=='' && email!=='' && address!=='' && contact!==''){
       if (contact.length===10 && EMAIL_REGEX.test(email))
       {
-        console.log("RESET TO HOME");
         return <Redirect to = 'https://yp-directory.herokuapp.com/' />
       }}
   };
@@ -49,7 +48,6 @@ function CreateFormModal(props) {
     if (name!=='' && email!=='' && address!=='' && contact!==''){
       if (contact.length===10 && EMAIL_REGEX.test(email))
         {
-          console.log("VALID EMAIL");
           const user = {
             name: name,
             email: email,
