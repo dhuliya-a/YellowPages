@@ -7,7 +7,7 @@ import {Redirect} from 'react-router';
 function EditFormModal(props) {
 
   const [email, setEmail] = useState('abc@def.com');
-  const [name, setName] = useState('Mark');
+  const [name, setName] = useState('User');
   const [contact, setContact] = useState('0000000000');
   const [address, setAddress] = useState('Default Address');
   const [profile_img, setPicture] = useState('No User Profile');
