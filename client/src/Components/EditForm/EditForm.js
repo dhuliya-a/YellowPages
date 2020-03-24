@@ -13,6 +13,10 @@ function EditFormModal(props) {
   const [profile_img, setPicture] = useState('No User Profile');
 
 
+  const resetToHome = (e) => {
+    <Redirect to = 'https://yp-directory.herokuapp.com/' />
+  };
+
   const handleUserNameInput = e => {
     setName(e.target.value);
   };
@@ -56,6 +60,7 @@ function EditFormModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      onExiting={()=>resetToHome()}
       
     >
       <Modal.Header closeButton>
@@ -114,7 +119,7 @@ function EditFormModal(props) {
             </Container>
             
             <Container align="center">
-              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit()}}>Save Changes</Button>
+              <Button style={{width:"80%"}} variant="primary" type="submit" onClick={()=>{ onSubmit(), resetToHome()}}>Save Changes</Button>
             </Container>
             <br/>
             <br/>
