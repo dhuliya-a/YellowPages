@@ -3,6 +3,7 @@ import {FaUserCircle, FaLifeRing, FaTelegram } from 'react-icons/fa';
 import {BsList} from 'react-icons/bs';
 
 import {Navbar, Nav, Form, Button} from 'react-bootstrap';
+
 function NavBar(){
   return(
     <>

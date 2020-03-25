@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Card, Table, Container, Dropdown} from 'react-bootstrap';
 import { FaEdit, FaTimes, FaUserCircle } from 'react-icons/fa';
 
-// import {Redirect} from 'react-router';
+import {getCurrentUser, getAllUsers} from '../../actions';
 
 import EditFormModal from '../EditForm/EditForm'
 
@@ -16,8 +16,7 @@ function TableComponent(){
   useEffect(() => {
     axios.get('/api/users')
     .then(response => {
-      console.log(response.data);
-      setUsers(response.data);
+      getAllUsers(response.data);
     })
     .catch((error) => {
       console.log(error);
@@ -27,11 +26,9 @@ function TableComponent(){
   const deleteProfile=(userId)=>{
     axios.post('/api/delete_user/'+userId)
     .then(response => {
-      console.log(response.data);
       axios.get('/api/users')
      .then(response => {
-        console.log(response.data);
-       setUsers(response.data);
+       getAllUsers(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -47,7 +44,7 @@ function TableComponent(){
     
     axios.get('/api/user/'+userId)
     .then(res => {
-      setUser(res.data)})
+      getCurrentUser(res.data)})
   }
 
 
